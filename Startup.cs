@@ -16,6 +16,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using MySqlConnector;
+using spring21_amazen.Repositories;
 
 namespace AmaZen
 {
@@ -45,10 +46,14 @@ namespace AmaZen
             services.AddScoped<AccountsRepository>();
             services.AddTransient<ProductsRepository>();
             services.AddTransient<WarehousesRepository>();
+            services.AddTransient<WarehouseProductsRepository>();
+
 
             // BUSINESS RULES
+            services.AddScoped<AccountService>();
             services.AddTransient<ProductsService>();
             services.AddTransient<WarehousesService>();
+            services.AddTransient<WarehouseProductsService>();
         }
 
         private void ConfigureCors(IServiceCollection services)

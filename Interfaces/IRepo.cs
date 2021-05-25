@@ -7,6 +7,6 @@ namespace AmaZen.Interfaces
         List<T> GetAll();
         T Create(T data);
         T GetById(int id);
-        T Update(T data);
+        bool Update(T data);
     }
 }

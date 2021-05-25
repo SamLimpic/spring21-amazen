@@ -18,7 +18,15 @@ namespace AmaZen.Repositories
 
         public Product Create(Product data)
         {
-            throw new System.NotImplementedException();
+            string sql = @"
+            INSERT INTO products
+            (name, description, sku, price)
+            VALUES
+            (@Name, @Description, @Sku, @Price)
+            SELECT LAST_INSERT_ID()
+            ";
+            data.Id = _db.ExecuteScalar<int>(sql, data);
+            return data;
         }
 
         public List<Product> GetAll()
@@ -29,12 +37,23 @@ namespace AmaZen.Repositories
 
         public Product GetById(int id)
         {
-            throw new System.NotImplementedException();
+            string sql = "SELECT * FROM products WHERE id = @id";
+            return _db.QueryFirstOrDefault<Product>(sql, new { id });
         }
 
-        public Product Update(Product data)
+        public bool Update(Product data)
         {
-            throw new System.NotImplementedException();
+            string sql = @"
+            UPDATE products
+            SET
+                name = @Name,
+                description = @Description,
+                sku = @Sku,
+                price = @Price
+            WHERE id = @id
+            ";
+            int affectedRows = _db.Execute(sql, data);
+            return affectedRows == 1;
         }
     }
 }

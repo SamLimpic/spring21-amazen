@@ -31,7 +31,7 @@ namespace AmaZen.Repositories
             throw new System.NotImplementedException();
         }
 
-        public Warehouse Update(Warehouse data)
+        public bool Update(Warehouse data)
         {
             throw new System.NotImplementedException();
         }
